@@ -1,0 +1,27 @@
+{
+  "extractedAt": "2026-04-27T14:20:35.954Z",
+  "sources": {
+    "oneWebSitemap": "https://ninnakallin.se/onewebstatic/sitemap.xml",
+    "blogSitemap": "https://blogbuilder.one.com/public/onecom/ninnakallin.se/sitemap.xml?id=a40d9e4b-a10c-439d-8bbf-9076639590ed&path=/blogg"
+  },
+  "discovery": {
+    "oneWebUrlCount": 21,
+    "blogUrlCount": 2,
+    "dagbokLikeUrlCount": 19,
+    "blogPostUrlCount": 1
+  },
+  "results": {
+    "rawRecordCount": 69,
+    "cleanRecordCount": 69,
+    "duplicatesRemoved": 0,
+    "shortBodyCount": 0,
+    "unmappedSectionCount": 0,
+    "sectionCoverage": {
+      "Blogg": 1,
+      "Femtonde dagboken": 32,
+      "Sextonde dagboken - berättelsen om en resa": 14,
+      "Sjuttonde dagboken - hemkomst": 22
+    }
+  },
+  "failedUrls": []
+}

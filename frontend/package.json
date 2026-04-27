@@ -1,0 +1,40 @@
+{
+	"name": "levnadsglad",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "vite build",
+		"lint": "eslint .",
+		"typecheck": "tsc --noEmit",
+		"type-coverage": "type-coverage --at-least 100 --detail",
+		"check": "npm run lint && npm run typecheck && npm run type-coverage",
+		"extract:legacy": "node scripts/extract-legacy-posts.mjs",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@portabletext/react": "^6.0.3",
+		"@sanity/client": "^7.22.0",
+		"@sanity/image-url": "^2.1.1",
+		"groq": "^5.22.0",
+		"react": "^19.2.5",
+		"react-dom": "^19.2.5"
+	},
+	"devDependencies": {
+		"@eslint/js": "^10.0.1",
+		"@types/node": "^25.6.0",
+		"@types/react": "^19.2.14",
+		"@types/react-dom": "^19.2.3",
+		"@vitejs/plugin-react": "^6.0.1",
+		"cheerio": "^1.2.0",
+		"eslint": "^10.2.1",
+		"eslint-plugin-react-hooks": "^7.1.1",
+		"eslint-plugin-react-refresh": "^0.5.2",
+		"globals": "^17.5.0",
+		"sass": "^1.99.0",
+		"type-coverage": "^2.29.7",
+		"typescript": "^5.9.3",
+		"vite": "^8.0.10"
+	}
+}
