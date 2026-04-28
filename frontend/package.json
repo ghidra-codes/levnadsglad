@@ -10,7 +10,6 @@
 		"typecheck": "tsc --noEmit",
 		"type-coverage": "type-coverage --at-least 100 --detail",
 		"check": "npm run lint && npm run typecheck && npm run type-coverage",
-		"extract:legacy": "node scripts/extract-legacy-posts.mjs",
 		"preview": "vite preview"
 	},
 	"dependencies": {
@@ -19,7 +18,8 @@
 		"@sanity/image-url": "^2.1.1",
 		"groq": "^5.22.0",
 		"react": "^19.2.5",
-		"react-dom": "^19.2.5"
+		"react-dom": "^19.2.5",
+		"react-router-dom": "^7.14.2"
 	},
 	"devDependencies": {
 		"@eslint/js": "^10.0.1",
@@ -27,7 +27,6 @@
 		"@types/react": "^19.2.14",
 		"@types/react-dom": "^19.2.3",
 		"@vitejs/plugin-react": "^6.0.1",
-		"cheerio": "^1.2.0",
 		"eslint": "^10.2.1",
 		"eslint-plugin-react-hooks": "^7.1.1",
 		"eslint-plugin-react-refresh": "^0.5.2",
