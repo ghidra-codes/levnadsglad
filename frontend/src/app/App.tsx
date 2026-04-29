@@ -1,4 +1,4 @@
-import { NavLink, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import SideNav from "@/components/SideNav";
 import DiaryPage from "@/pages/DiaryPage";
 import HomePage from "@/pages/HomePage";
@@ -12,12 +12,8 @@ function App() {
 				<SideNav />
 				<div className="app-content">
 					<header className="app-header">
-						<div>
-							<h1>Levnadsglad</h1>
-						</div>
-						<nav className="app-nav">
-							<NavLink to="/">Hem</NavLink>
-						</nav>
+						<h1>Levnadsglad</h1>
+						<p className="tagline">Dagböcker och textsamlingar av Ninna Kallin</p>
 					</header>
 					<main className="app-main">
 						<Routes>

@@ -9,7 +9,7 @@ export const categoryGroupsQuery = `*[_type == "categoryGroup"]
 	_type == "category" &&
 	defined(group) &&
 	group._ref == ^._id
-  ] | order(order asc) {
+  ] | order(order desc) {
 	_id,
 	title,
 	subtitle,
@@ -39,7 +39,6 @@ export const postListQuery = `*[_type == "post"] | order(publishedAt desc) {
 		"slug": slug.current,
 		order
 	},
-	sourceUrl,
 	content
 }`;
 
@@ -55,7 +54,6 @@ export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0] {
 		"slug": slug.current,
 		order
 	},
-	sourceUrl,
 	content
 }`;
 
@@ -74,7 +72,6 @@ export const postsByCategoryQuery = `*[
 		"slug": slug.current,
 		order
 	},
-	sourceUrl,
 	content
 }`;
 
@@ -92,3 +89,16 @@ export const diaryNavQuery = `*[_type == "post" && defined(category)]
 		order
 	}
 }`;
+
+export const aboutQuery = `
+  *[_type == "aboutSection" && _id == "aboutSection"][0]{
+    title,
+    content,
+    aboutImage{
+      asset->{
+        url
+      },
+      alt
+    }
+  }
+`;

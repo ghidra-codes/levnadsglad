@@ -4,7 +4,13 @@ export default {
 	type: "document",
 	title: "Post",
 	fields: [
-		{ name: "title", type: "string" },
+		{
+			name: "title",
+			type: "string",
+			options: {
+				search: { weight: 10 },
+			},
+		},
 		{
 			name: "slug",
 			type: "slug",
@@ -45,4 +51,11 @@ export default {
 			],
 		},
 	],
+
+	preview: {
+		select: {
+			title: "title",
+			subtitle: "category.title",
+		},
+	},
 };

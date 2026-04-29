@@ -35,7 +35,6 @@ export interface Post {
 	slug?: string;
 	section?: string;
 	publishedAt?: string;
-	sourceUrl?: string;
 	content?: PostContent[];
 	category?: Category;
 }

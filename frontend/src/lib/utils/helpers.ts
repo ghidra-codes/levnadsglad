@@ -20,8 +20,11 @@ export const extractParagraphs = (content?: PostContent[] | null): string[] => {
 
 	return content
 		.filter(
-			(block): block is PostBlock & { children: NonNullable<PostBlock["children"]> } =>
-				block._type === "block" && Array.isArray(block.children),
+			(
+				block,
+			): block is PostBlock & {
+				children: NonNullable<PostBlock["children"]>;
+			} => block._type === "block" && Array.isArray(block.children),
 		)
 		.map((block) =>
 			block.children
@@ -33,9 +36,11 @@ export const extractParagraphs = (content?: PostContent[] | null): string[] => {
 };
 
 // ROUTING
-export const buildDiaryPath = (slug: string): string => `/diary/${encodeURIComponent(slug)}`;
+export const buildDiaryPath = (slug: string): string =>
+	`/diary/${encodeURIComponent(slug)}`;
 
-export const buildPostPath = (slug?: string): string => (slug ? `/post/${slug}` : "");
+export const buildPostPath = (slug?: string): string =>
+	slug ? `/post/${slug}` : "";
 
 // TEXT UTIL
 export const buildExcerpt = (paragraphs: string[], maxLength = 140): string => {

@@ -34,17 +34,16 @@ const DiaryPage = () => {
 	const safePage = Math.min(currentPage, pageCount);
 	const pageStart = (safePage - 1) * POSTS_PER_PAGE;
 	const pageItems = items.slice(pageStart, pageStart + POSTS_PER_PAGE);
-	const pageLabel =
-		items.length > POSTS_PER_PAGE
-			? `${pageStart + 1}-${pageStart + pageItems.length}`
-			: `${items.length}`;
+	const pageLabel = items.length > POSTS_PER_PAGE ? `${pageStart + 1}-${pageStart + pageItems.length}` : `${items.length}`;
 
 	useEffect(() => {
 		if (currentPage === safePage) {
 			return;
 		}
 
-		setSearchParams(safePage > 1 ? { page: String(safePage) } : {}, { replace: true });
+		setSearchParams(safePage > 1 ? { page: String(safePage) } : {}, {
+			replace: true,
+		});
 	}, [currentPage, safePage, setSearchParams]);
 
 	if (!slug) {
@@ -84,19 +83,13 @@ const DiaryPage = () => {
 			</header>
 			{isLoading ? <p className="post-list__status">Laddar inlägg...</p> : null}
 			{isError ? <p className="post-list__status">Kunde inte hämta inlägg.</p> : null}
-			{!isLoading && !isError && items.length === 0 ? (
-				<p className="post-list__status">Inga inlägg hittades.</p>
-			) : null}
+			{!isLoading && !isError && items.length === 0 ? <p className="post-list__status">Inga inlägg hittades.</p> : null}
 			{items.length > 0 ? (
 				<>
 					<nav className="diary-nav" aria-label="Inlägg i dagboken">
 						<div className="diary-nav__select">
 							<label htmlFor="diary-post-select">Välj inlägg</label>
-							<select
-								id="diary-post-select"
-								defaultValue=""
-								onChange={(event) => handlePostSelect(event.target.value)}
-							>
+							<select id="diary-post-select" defaultValue="" onChange={(event) => handlePostSelect(event.target.value)}>
 								<option value="" disabled>
 									Öppna ett enskilt inlägg
 								</option>
@@ -124,21 +117,13 @@ const DiaryPage = () => {
 					</nav>
 					{pageCount > 1 ? (
 						<div className="diary-pagination" aria-label="Sidnavigering">
-							<button
-								type="button"
-								disabled={safePage === 1}
-								onClick={() => handlePageChange(safePage - 1)}
-							>
+							<button type="button" disabled={safePage === 1} onClick={() => handlePageChange(safePage - 1)}>
 								Föregående
 							</button>
 							<span>
 								Sida {safePage} av {pageCount}
 							</span>
-							<button
-								type="button"
-								disabled={safePage === pageCount}
-								onClick={() => handlePageChange(safePage + 1)}
-							>
+							<button type="button" disabled={safePage === pageCount} onClick={() => handlePageChange(safePage + 1)}>
 								Nästa
 							</button>
 						</div>
@@ -152,21 +137,13 @@ const DiaryPage = () => {
 					</div>
 					{pageCount > 1 ? (
 						<div className="diary-pagination diary-pagination--bottom" aria-label="Sidnavigering">
-							<button
-								type="button"
-								disabled={safePage === 1}
-								onClick={() => handlePageChange(safePage - 1)}
-							>
+							<button type="button" disabled={safePage === 1} onClick={() => handlePageChange(safePage - 1)}>
 								Föregående
 							</button>
 							<span>
 								Sida {safePage} av {pageCount}
 							</span>
-							<button
-								type="button"
-								disabled={safePage === pageCount}
-								onClick={() => handlePageChange(safePage + 1)}
-							>
+							<button type="button" disabled={safePage === pageCount} onClick={() => handlePageChange(safePage + 1)}>
 								Nästa
 							</button>
 						</div>
