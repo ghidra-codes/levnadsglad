@@ -37,3 +37,132 @@
 	letter-spacing: 0.08em;
 	color: rgba(0, 0, 0, 0.55);
 }
+
+.diary-header {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 1rem;
+}
+
+.diary-nav {
+	display: grid;
+	gap: 1rem;
+	margin: 1.5rem 0;
+	padding: 1rem;
+	border-radius: 0.75rem;
+	background: rgba(245, 242, 235, 0.85);
+	box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.diary-nav__select {
+	display: grid;
+	gap: 0.35rem;
+}
+
+.diary-nav__select label {
+	font-size: 0.85rem;
+	font-weight: 700;
+	color: rgba(0, 0, 0, 0.65);
+}
+
+.diary-nav__select select {
+	width: 100%;
+	max-width: 34rem;
+	padding: 0.65rem 0.75rem;
+	border: 1px solid rgba(0, 0, 0, 0.16);
+	border-radius: 0.5rem;
+	background: rgba(255, 255, 255, 0.92);
+	color: inherit;
+	font: inherit;
+}
+
+.diary-nav__current {
+	display: grid;
+	gap: 0.65rem;
+}
+
+.diary-nav__current p {
+	margin: 0;
+	color: rgba(0, 0, 0, 0.62);
+	font-size: 0.95rem;
+}
+
+.diary-nav__current ul {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.45rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.diary-nav__current a {
+	display: inline-flex;
+	max-width: 18rem;
+	padding: 0.35rem 0.6rem;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.88);
+	color: rgba(0, 0, 0, 0.76);
+	font-size: 0.9rem;
+	line-height: 1.35;
+	text-decoration: none;
+}
+
+.diary-nav__current a:hover,
+.diary-nav__current a:focus {
+	text-decoration: underline;
+}
+
+.diary-pagination {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 1rem;
+	margin: 1rem 0 1.5rem;
+}
+
+.diary-pagination--bottom {
+	margin: 1.5rem 0 0;
+}
+
+.diary-pagination button {
+	padding: 0.55rem 0.8rem;
+	border: 1px solid rgba(0, 0, 0, 0.16);
+	border-radius: 0.5rem;
+	background: rgba(255, 255, 255, 0.86);
+	color: inherit;
+	font: inherit;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.diary-pagination button:disabled {
+	cursor: not-allowed;
+	opacity: 0.45;
+}
+
+.diary-pagination span {
+	color: rgba(0, 0, 0, 0.65);
+	font-weight: 700;
+}
+
+.diary-flow {
+	display: grid;
+	gap: 1.5rem;
+}
+
+.diary-flow__post {
+	scroll-margin-top: 1rem;
+}
+
+@media (max-width: 640px) {
+	.diary-pagination {
+		align-items: stretch;
+		flex-direction: column;
+	}
+
+	.diary-pagination span {
+		order: -1;
+	}
+}

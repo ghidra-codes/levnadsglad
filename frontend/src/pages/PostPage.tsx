@@ -5,7 +5,7 @@ import usePostBySlug from "@/hooks/data/usePostBySlug";
 const PostPage = () => {
 	const { slug } = useParams();
 	const resolvedSlug = slug ?? "";
-	const { post, loading, error } = usePostBySlug(resolvedSlug);
+	const { data: post = null, isLoading, isError } = usePostBySlug(resolvedSlug);
 
 	if (!resolvedSlug) {
 		return (
@@ -23,10 +23,10 @@ const PostPage = () => {
 			<Link className="page__back" to="/">
 				Tillbaka till startsidan
 			</Link>
-			{loading ? <p>Laddar inlägg...</p> : null}
-			{error ? <p>Kunde inte hämta inlägget.</p> : null}
-			{!loading && !error && post ? <Post post={post} /> : null}
-			{!loading && !error && !post ? <p>Inget inlägg hittades.</p> : null}
+			{isLoading ? <p>Laddar inlägg...</p> : null}
+			{isError ? <p>Kunde inte hämta inlägget.</p> : null}
+			{!isLoading && !isError && post ? <Post post={post} /> : null}
+			{!isLoading && !isError && !post ? <p>Inget inlägg hittades.</p> : null}
 		</section>
 	);
 };

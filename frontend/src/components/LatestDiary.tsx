@@ -1,46 +1,38 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
 import usePostList from "@/hooks/data/usePostList";
-import { extractParagraphs, formatDate } from "@/lib/utils/helpers";
+import {
+	buildDiaryPath,
+	buildExcerpt,
+	buildPostPath,
+	extractParagraphs,
+	formatDate,
+} from "@/lib/utils/helpers";
 import type { PostListItem } from "@/types/post.types";
 
 const LatestDiary = () => {
-	const { posts, loading, error } = usePostList();
+	const { data: posts = [], isLoading, isError, error } = usePostList();
 
+	// DERIVE ITEMS
 	const items = useMemo<PostListItem[]>(() => {
 		return posts.map((post) => ({
 			...post,
-			publishedLabel: formatDate(post.publishedAt),
+			publishedLabel: post.publishedAt ? formatDate(post.publishedAt) : "",
 			paragraphs: extractParagraphs(post.content),
 		}));
 	}, [posts]);
 
-	const latestSection = useMemo(() => {
-		const firstWithSection = items.find((post) => post.section);
-		return firstWithSection?.section ?? "";
-	}, [items]);
+	// GET LATEST CATEGORY (from latest post)
+	const latestCategory = items[0]?.category;
 
+	// FILTER POSTS BY THAT CATEGORY
 	const thumbnailItems = useMemo(() => {
-		if (!latestSection) {
-			return [] as PostListItem[];
-		}
+		if (!latestCategory?.slug) return [];
 
-		return items.filter((post) => post.section === latestSection).slice(0, 6);
-	}, [items, latestSection]);
+		return items.filter((post) => post.category?.slug === latestCategory.slug).slice(0, 6);
+	}, [items, latestCategory]);
 
-	const buildExcerpt = (paragraphs: string[], maxLength = 140): string => {
-		const text = paragraphs.join(" ").replace(/\s+/g, " ").trim();
-		if (!text) {
-			return "";
-		}
-
-		return text.length <= maxLength ? text : `${text.slice(0, maxLength).trim()}...`;
-	};
-
-	const buildPostPath = (slug?: string): string => (slug ? `/post/${slug}` : "");
-	const buildDiaryPath = (section: string): string => `/diary/${encodeURIComponent(section)}`;
-
-	if (loading) {
+	if (isLoading) {
 		return (
 			<section className="post-list">
 				<p>Laddar senaste dagboken...</p>
@@ -48,7 +40,8 @@ const LatestDiary = () => {
 		);
 	}
 
-	if (error) {
+	if (isError) {
+		console.error(error);
 		return (
 			<section className="post-list">
 				<p>Kunde inte hämta senaste dagboken.</p>
@@ -58,25 +51,26 @@ const LatestDiary = () => {
 
 	return (
 		<section className="post-list">
-			{thumbnailItems.length > 0 ? (
+			{thumbnailItems.length > 0 && latestCategory ? (
 				<div className="post-list__thumbnails">
 					<div className="post-list__thumbnails-header">
 						<div>
 							<h2>Senaste dagboken</h2>
-							<p>{latestSection}</p>
+							<p>{latestCategory.title}</p>
 						</div>
-						{latestSection ? (
-							<Link className="post-list__thumbnails-link" to={buildDiaryPath(latestSection)}>
-								Visa hela dagboken
-							</Link>
-						) : null}
+
+						<Link className="post-list__thumbnails-link" to={buildDiaryPath(latestCategory.slug)}>
+							Visa hela dagboken
+						</Link>
 					</div>
+
 					<div className="post-list__thumbnails-grid">
 						{thumbnailItems.map((post) => (
 							<article key={`thumb-${post._id}`} className="post-list__thumbnail">
-								{post.publishedLabel ? (
+								{post.publishedLabel && (
 									<span className="post-list__thumbnail-date">{post.publishedLabel}</span>
-								) : null}
+								)}
+
 								{post.slug ? (
 									<Link className="post-list__thumbnail-link" to={buildPostPath(post.slug)}>
 										<h3>{post.title}</h3>
@@ -84,7 +78,8 @@ const LatestDiary = () => {
 								) : (
 									<h3>{post.title}</h3>
 								)}
-								{post.paragraphs.length > 0 ? <p>{buildExcerpt(post.paragraphs)}</p> : null}
+
+								{post.paragraphs.length > 0 && <p>{buildExcerpt(post.paragraphs)}</p>}
 							</article>
 						))}
 					</div>

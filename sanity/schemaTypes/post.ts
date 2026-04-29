@@ -14,21 +14,35 @@ export default {
 
 		// CATEGORY
 		{
-			name: "section",
-			type: "string",
-			title: "Section",
-		},
-
-		// ORIGINAL SOURCE
-		{
-			name: "sourceUrl",
-			type: "url",
+			name: "category",
+			type: "reference",
+			to: [{ type: "category" }],
+			validation: (Rule: any) => Rule.required(),
 		},
 
 		{
 			name: "content",
 			type: "array",
-			of: [{ type: "block" }],
+			of: [
+				{ type: "block" },
+				{
+					type: "image",
+					options: { hotspot: true },
+					fields: [
+						{
+							name: "alt",
+							type: "string",
+							title: "Alternative text",
+							description: "Describe the image for visitors using screen readers.",
+						},
+						{
+							name: "caption",
+							type: "string",
+							title: "Caption",
+						},
+					],
+				},
+			],
 		},
 	],
 };

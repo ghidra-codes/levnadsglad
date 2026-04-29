@@ -21,6 +21,14 @@
 	color: rgba(0, 0, 0, 0.65);
 }
 
+.side-nav__groups {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: grid;
+	gap: 0.5rem;
+}
+
 .side-nav__list {
 	list-style: none;
 	padding: 0;
@@ -30,43 +38,47 @@
 }
 
 .side-nav__item {
-	display: grid;
-	gap: 0.4rem;
+	.side-nav__category {
+		display: flex;
+		flex-direction: column;
+		gap: 0.25rem;
+		padding: 0.35rem 0;
+		font-weight: 600;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.side-nav__category--active {
+		text-decoration: underline;
+	}
+
+	.side-nav__category:hover,
+	.side-nav__category:focus {
+		text-decoration: underline;
+	}
+
+	.side-nav__title {
+		font-size: 0.95rem;
+		font-weight: 500;
+	}
+
+	.side-nav__subtitle {
+		font-size: 0.85rem;
+		color: rgba(0, 0, 0, 0.65);
+	}
 }
 
-.side-nav__section {
-	font-weight: 600;
-	color: inherit;
-	text-decoration: none;
-}
-
-.side-nav__section:hover,
-.side-nav__section:focus {
-	text-decoration: underline;
-}
-
-.side-nav__posts {
-	list-style: none;
-	padding: 0 0 0 0.5rem;
-	margin: 0;
-	display: none;
-	gap: 0.35rem;
-}
-
-.side-nav__item:hover .side-nav__posts,
-.side-nav__item:focus-within .side-nav__posts {
-	display: grid;
-}
-
-.side-nav__post {
+.side-nav__count {
+	flex: 0 0 auto;
+	min-width: 1.65rem;
+	padding: 0.1rem 0.45rem;
+	border-radius: 999px;
+	background: rgba(0, 0, 0, 0.08);
 	font-size: 0.9rem;
+	font-weight: 600;
+	line-height: 1.4;
+	text-align: center;
 	color: rgba(0, 0, 0, 0.75);
-	text-decoration: none;
-}
-
-.side-nav__post:hover,
-.side-nav__post:focus {
-	text-decoration: underline;
 }
 
 @media (max-width: 900px) {

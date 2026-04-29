@@ -1,10 +1,44 @@
-// Post list used on the landing page.
+export const categoryGroupsQuery = `*[_type == "categoryGroup"]
+| order(order asc) {
+  _id,
+  title,
+  "slug": slug.current,
+  order,
+
+  "categories": *[
+	_type == "category" &&
+	defined(group) &&
+	group._ref == ^._id
+  ] | order(order asc) {
+	_id,
+	title,
+	subtitle,
+	"slug": slug.current,
+	order
+  }
+}`;
+
+export const categoriesQuery = `*[_type == "category"]
+| order(order asc) {
+	_id,
+	title,
+	subtitle,
+	"slug": slug.current,
+	order
+}`;
+
 export const postListQuery = `*[_type == "post"] | order(publishedAt desc) {
 	_id,
 	title,
 	"slug": slug.current,
 	publishedAt,
-	section,
+	"category": category->{
+		_id,
+		title,
+		subtitle,
+		"slug": slug.current,
+		order
+	},
 	sourceUrl,
 	content
 }`;
@@ -14,25 +48,47 @@ export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0] {
 	title,
 	"slug": slug.current,
 	publishedAt,
-	section,
+	"category": category->{
+		_id,
+		title,
+		subtitle,
+		"slug": slug.current,
+		order
+	},
 	sourceUrl,
 	content
 }`;
 
-export const postsBySectionQuery = `*[_type == "post" && section == $section] | order(publishedAt desc) {
+export const postsByCategoryQuery = `*[
+	_type == "post" &&
+	category->slug.current == $slug
+] | order(publishedAt desc) {
 	_id,
 	title,
 	"slug": slug.current,
 	publishedAt,
-	section,
+	"category": category->{
+		_id,
+		title,
+		subtitle,
+		"slug": slug.current,
+		order
+	},
 	sourceUrl,
 	content
 }`;
 
-export const diaryNavQuery = `*[_type == "post" && defined(section)] | order(section asc, publishedAt desc) {
+export const diaryNavQuery = `*[_type == "post" && defined(category)]
+| order(category->order asc, publishedAt desc) {
 	_id,
 	title,
 	"slug": slug.current,
 	publishedAt,
-	section
+	"category": category->{
+		_id,
+		title,
+	    subtitle,
+		"slug": slug.current,
+		order
+	}
 }`;

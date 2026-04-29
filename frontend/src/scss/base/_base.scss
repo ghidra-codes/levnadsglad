@@ -1,4 +1,4 @@
-@use "./tokens" as vars;
+@use "./variables" as vars;
 
 * {
 	box-sizing: border-box;
@@ -16,4 +16,5 @@ body {
 	color: vars.$color-text;
 	background-color: vars.$color-bg;
 	line-height: 1.5;
+	overflow-y: scroll;
 }

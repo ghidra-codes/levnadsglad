@@ -1,5 +1,4 @@
 import { NavLink, Route, Routes } from "react-router-dom";
-import "@/scss/app.scss";
 import SideNav from "@/components/SideNav";
 import DiaryPage from "@/pages/DiaryPage";
 import HomePage from "@/pages/HomePage";
@@ -24,7 +23,7 @@ function App() {
 						<Routes>
 							<Route path="/" element={<HomePage />} />
 							<Route path="/post/:slug" element={<PostPage />} />
-							<Route path="/diary/:section" element={<DiaryPage />} />
+							<Route path="/diary/:categorySlug" element={<DiaryPage />} />
 							<Route path="*" element={<NotFoundPage />} />
 						</Routes>
 					</main>

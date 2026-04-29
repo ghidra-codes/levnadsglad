@@ -1,22 +1,46 @@
-export type PostSpan = {
+import type { Category } from "./category.types";
+
+export interface PostSpan {
+	_type?: "span";
 	text?: string;
-};
+	marks?: string[];
+}
 
-export type PostBlock = {
+export interface PostBlock {
+	_type: "block";
+	_key?: string;
+	style?: string;
 	children?: PostSpan[];
-};
+	markDefs?: [];
+}
 
-export type Post = {
+export interface SanityImageReference {
+	_type?: "reference";
+	_ref: string;
+}
+
+export interface PostImage {
+	_type: "image";
+	_key?: string;
+	asset?: SanityImageReference;
+	alt?: string;
+	caption?: string;
+}
+
+export type PostContent = PostBlock | PostImage;
+
+export interface Post {
 	_id: string;
 	title: string;
 	slug?: string;
 	section?: string;
 	publishedAt?: string;
 	sourceUrl?: string;
-	content?: PostBlock[];
-};
+	content?: PostContent[];
+	category?: Category;
+}
 
-export type PostListItem = Post & {
+export interface PostListItem extends Post {
 	publishedLabel: string;
 	paragraphs: string[];
-};
+}
