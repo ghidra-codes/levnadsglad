@@ -58,3 +58,26 @@
 	font-size: 0.95rem;
 	line-height: 1.45;
 }
+
+.post-reactions {
+	margin-top: 2rem;
+
+	&__list {
+		display: flex;
+		gap: 0.5rem;
+	}
+
+	&__btn {
+		display: flex;
+		align-items: center;
+		gap: 0.35rem;
+		border-radius: 999px;
+		padding: 0.35rem 0.6rem;
+		border: 1px solid rgba(0, 0, 0, 0.1);
+		background: transparent;
+
+		&--active {
+			background: rgba(0, 0, 0, 0.08);
+		}
+	}
+}

@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import SideNav from "@/components/SideNav";
 import DiaryPage from "@/pages/DiaryPage";
@@ -25,6 +26,18 @@ function App() {
 					</main>
 				</div>
 			</div>
+			<Toaster
+				position="top-center"
+				toastOptions={{
+					duration: 2500,
+					style: {
+						background: "#222",
+						color: "#fff",
+						borderRadius: "12px",
+						padding: "10px 14px",
+					},
+				}}
+			/>
 		</div>
 	);
 }

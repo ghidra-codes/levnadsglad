@@ -1,4 +1,6 @@
+import { REACTION_TYPES } from "@/constants/reactions";
 import type { PostBlock, PostContent } from "@/types/post.types";
+import type { ReactionRow } from "@/types/reactions.type";
 
 // DATE FORMATTING
 export const formatDate = (value?: string | null): string => {
@@ -36,11 +38,9 @@ export const extractParagraphs = (content?: PostContent[] | null): string[] => {
 };
 
 // ROUTING
-export const buildDiaryPath = (slug: string): string =>
-	`/diary/${encodeURIComponent(slug)}`;
+export const buildDiaryPath = (slug: string): string => `/diary/${encodeURIComponent(slug)}`;
 
-export const buildPostPath = (slug?: string): string =>
-	slug ? `/post/${slug}` : "";
+export const buildPostPath = (slug?: string): string => (slug ? `/post/${slug}` : "");
 
 // TEXT UTIL
 export const buildExcerpt = (paragraphs: string[], maxLength = 140): string => {
@@ -53,3 +53,18 @@ export const buildExcerpt = (paragraphs: string[], maxLength = 140): string => {
 
 	return `${text.slice(0, maxLength).trim()}...`;
 };
+
+// REACTIONS
+export const mapReactions = (data: ReactionRow[] | null) => {
+	const map: Record<string, number> = {};
+
+	REACTION_TYPES.forEach((t) => (map[t] = 0));
+
+	data?.forEach((r) => {
+		map[r.reaction_type] = r.count;
+	});
+
+	return map;
+};
+
+export const getStorageKey = (postId: string, type: string) => `reaction-${postId}-${type}`;

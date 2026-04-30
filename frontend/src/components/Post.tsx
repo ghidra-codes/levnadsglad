@@ -1,11 +1,29 @@
 import { PortableText } from "@portabletext/react";
+import toast from "react-hot-toast";
 import { extractParagraphs, formatDate } from "@/lib/utils/helpers";
 import type { PostProps } from "@/types/props.types";
+import PostReactions from "./PostReactions";
 import portableTextComponents from "./utils/portableTextComponents";
 
 const Post = ({ post }: PostProps) => {
 	const paragraphs = extractParagraphs(post.content);
 	const publishedLabel = formatDate(post.publishedAt);
+
+	const postUrl = `${window.location.origin}/post/${post.slug}`;
+
+	const handleShare = async () => {
+		await navigator.clipboard.writeText(postUrl);
+		toast.success("Länk kopierad", {
+			icon: "🔗",
+		});
+	};
+
+	const buildMailtoLink = () => {
+		const to = "ninna@levnadsglad.se";
+		const subject = encodeURIComponent(`Om: ${post.category.title} - ${post.title}`);
+
+		return `mailto:${to}?subject=${subject}`;
+	};
 
 	return (
 		<article className="post">
@@ -26,6 +44,17 @@ const Post = ({ post }: PostProps) => {
 						</p>
 					))
 				: null}
+			<footer className="post__footer">
+				<PostReactions postId={post._id} />
+
+				<button className="post__share" onClick={handleShare}>
+					Dela
+				</button>
+
+				<a href={buildMailtoLink()} className="post__mail">
+					Dela en tanke
+				</a>
+			</footer>
 		</article>
 	);
 };
