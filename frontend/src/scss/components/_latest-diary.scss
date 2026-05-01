@@ -13,8 +13,7 @@
 		border-radius: 1.25rem;
 		background: vars.$color-surface;
 		border: 1px solid vars.$color-muted;
-
-		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+		box-shadow: vars.$shadow-soft;
 	}
 
 	&__thumbnails-header {
@@ -33,12 +32,17 @@
 		p {
 			margin: 0;
 			color: vars.$color-text-light;
+			text-transform: uppercase;
+			letter-spacing: 0.08em;
 		}
 	}
 
 	&__thumbnails-link {
 		display: block;
 		height: 100%;
+		&:hover {
+			color: vars.$color-gold;
+		}
 	}
 
 	&__thumbnails-grid {

@@ -6,7 +6,7 @@
 	border-radius: 1.25rem;
 	background: vars.$color-surface;
 	border: 1px solid vars.$color-muted;
-	box-shadow: 0 10px 24px rgba(47, 42, 38, 0.08);
+	box-shadow: vars.$shadow-medium;
 
 	&__header {
 		display: flex;
@@ -88,7 +88,7 @@
 		height: auto;
 		border-radius: 0.75rem;
 
-		box-shadow: 0 10px 24px rgba(47, 42, 38, 0.1);
+		box-shadow: vars.$shadow-strong;
 	}
 
 	&__caption {
