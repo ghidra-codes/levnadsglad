@@ -12,6 +12,7 @@ const PostReactions = ({ postId }: { postId: string }) => {
 			<div className="post-reactions__list">
 				{REACTIONS.map((r) => {
 					const reacted = !!localStorage.getItem(getStorageKey(postId, r.key));
+					const Icon = r.label;
 
 					return (
 						<button
@@ -19,7 +20,9 @@ const PostReactions = ({ postId }: { postId: string }) => {
 							className={`post-reactions__btn ${reacted ? "post-reactions__btn--active" : ""}`}
 							onClick={() => toggleReaction(r.key)}
 						>
-							<span>{r.label}</span>
+							<span>
+								<Icon />
+							</span>
 							<span>{counts[r.key] || 0}</span>
 						</button>
 					);

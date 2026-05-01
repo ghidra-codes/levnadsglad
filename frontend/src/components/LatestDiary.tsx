@@ -34,7 +34,7 @@ const LatestDiary = () => {
 
 	if (isLoading) {
 		return (
-			<section className="post-list">
+			<section className="post-latest">
 				<p>Laddar senaste dagboken...</p>
 			</section>
 		);
@@ -43,45 +43,61 @@ const LatestDiary = () => {
 	if (isError) {
 		console.error(error);
 		return (
-			<section className="post-list">
+			<section className="post-latest">
 				<p>Kunde inte hämta senaste dagboken.</p>
 			</section>
 		);
 	}
 
 	return (
-		<section className="post-list">
+		<section className="diary-latest">
 			{thumbnailItems.length > 0 && latestCategory ? (
-				<div className="post-list__thumbnails">
-					<div className="post-list__thumbnails-header">
+				<div className="post-latest__thumbnails">
+					<div className="post-latest__thumbnails-header">
 						<div>
 							<h2>Senaste dagboken</h2>
 							<p>{latestCategory.title}</p>
 						</div>
 
-						<Link className="post-list__thumbnails-link" to={buildDiaryPath(latestCategory.slug)}>
+						<Link
+							className="post-latest__thumbnails-link"
+							to={buildDiaryPath(latestCategory.slug)}
+						>
 							Visa hela dagboken
 						</Link>
 					</div>
 
-					<div className="post-list__thumbnails-grid">
-						{thumbnailItems.map((post) => (
-							<article key={`thumb-${post._id}`} className="post-list__thumbnail">
-								{post.publishedLabel && (
-									<span className="post-list__thumbnail-date">{post.publishedLabel}</span>
-								)}
+					<div className="post-latest__thumbnails-grid">
+						{thumbnailItems.map((post) => {
+							const content = (
+								<>
+									{post.publishedLabel && (
+										<span className="post-latest__thumbnail-date">
+											{post.publishedLabel}
+										</span>
+									)}
 
-								{post.slug ? (
-									<Link className="post-list__thumbnail-link" to={buildPostPath(post.slug)}>
-										<h3>{post.title}</h3>
-									</Link>
-								) : (
 									<h3>{post.title}</h3>
-								)}
 
-								{post.paragraphs.length > 0 && <p>{buildExcerpt(post.paragraphs)}</p>}
-							</article>
-						))}
+									{post.paragraphs.length > 0 && <p>{buildExcerpt(post.paragraphs)}</p>}
+								</>
+							);
+
+							return (
+								<article key={`thumb-${post._id}`} className="post-latest__thumbnail">
+									{post.slug ? (
+										<Link
+											className="post-latest__thumbnail-link"
+											to={buildPostPath(post.slug)}
+										>
+											{content}
+										</Link>
+									) : (
+										content
+									)}
+								</article>
+							);
+						})}
 					</div>
 				</div>
 			) : null}

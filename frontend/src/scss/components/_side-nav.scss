@@ -1,3 +1,5 @@
+@use "../base/variables" as vars;
+
 .side-nav {
 	position: sticky;
 	top: 1.5rem;
@@ -6,7 +8,8 @@
 	&__inner {
 		padding: 1.5rem 1.25rem;
 		border-radius: 3px;
-		background: rgba(250, 248, 244, 0.9);
+		background: rgba(vars.$color-green-soft, 0.45);
+		border: 1px solid vars.$color-muted;
 		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
 
 		height: calc(100vh - 4rem);
@@ -26,7 +29,7 @@
 		margin-top: 0.5rem;
 		background: none;
 		border: none;
-		color: rgba(0, 0, 0, 0.6);
+		color: vars.$color-text-light;
 		font-size: 0.88rem;
 		cursor: pointer;
 
@@ -37,7 +40,7 @@
 
 	&__status {
 		margin: 0 0 0.75rem;
-		color: rgba(0, 0, 0, 0.65);
+		color: vars.$color-text-light;
 	}
 
 	&__groups {
@@ -49,7 +52,8 @@
 	}
 
 	&__group {
-		background-color: rgba(0, 0, 0, 0.04);
+		background-color: vars.$color-surface;
+		border: 1px solid vars.$color-gold;
 		border-radius: 6px;
 		padding: 0.75rem;
 	}
@@ -72,7 +76,8 @@
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;
-		border: 1px solid rgba(0, 0, 0, 0.08);
+		background-color: vars.$color-surface-gold;
+		border: 1px solid vars.$color-gold;
 		border-radius: 8px;
 		padding: 0.25rem 0.75rem;
 		font-weight: 600;
@@ -80,14 +85,12 @@
 		text-decoration: none;
 
 		&--active {
-			background-color: rgba(0, 0, 0, 0.08);
-			color: rgba(0, 0, 0, 0.85);
+			background-color: vars.$color-gold-soft;
 		}
 
 		&:hover,
 		&:focus {
-			background-color: rgba(0, 0, 0, 0.08);
-			color: rgba(0, 0, 0, 0.85);
+			background-color: vars.$color-gold-soft;
 		}
 	}
 
@@ -98,7 +101,7 @@
 
 	&__subtitle {
 		font-size: 0.85rem;
-		color: rgba(0, 0, 0, 0.65);
+		color: vars.$color-text-light;
 	}
 
 	@media (max-width: 900px) {

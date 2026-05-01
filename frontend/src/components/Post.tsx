@@ -1,5 +1,6 @@
 import { PortableText } from "@portabletext/react";
 import toast from "react-hot-toast";
+import { PiLink } from "react-icons/pi";
 import { extractParagraphs, formatDate } from "@/lib/utils/helpers";
 import type { PostProps } from "@/types/props.types";
 import PostReactions from "./PostReactions";
@@ -14,7 +15,7 @@ const Post = ({ post }: PostProps) => {
 	const handleShare = async () => {
 		await navigator.clipboard.writeText(postUrl);
 		toast.success("Länk kopierad", {
-			icon: "🔗",
+			icon: <PiLink />,
 		});
 	};
 
@@ -28,9 +29,15 @@ const Post = ({ post }: PostProps) => {
 	return (
 		<article className="post">
 			<header className="post__header">
-				{post.section ? <span className="post__section">{post.section}</span> : null}
-				<h2>{post.title}</h2>
-				{publishedLabel ? <p className="post__date">{publishedLabel}</p> : null}
+				<div className="post__header-content">
+					<span className="post__category">{post.category.title}</span>
+					<h2>{post.title}</h2>
+					{publishedLabel ? <p className="post__date">{publishedLabel}</p> : null}
+				</div>
+
+				<button className="post__share" onClick={handleShare}>
+					Kopiera länk <PiLink />
+				</button>
 			</header>
 			{post.content?.length ? (
 				<div className="post__content">
@@ -46,10 +53,6 @@ const Post = ({ post }: PostProps) => {
 				: null}
 			<footer className="post__footer">
 				<PostReactions postId={post._id} />
-
-				<button className="post__share" onClick={handleShare}>
-					Dela
-				</button>
 
 				<a href={buildMailtoLink()} className="post__mail">
 					Dela en tanke

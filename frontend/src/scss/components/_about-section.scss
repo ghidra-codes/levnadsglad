@@ -1,17 +1,25 @@
-.about {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+@use "../base/variables" as vars;
 
-	&__image {
-		border-radius: 2rem;
-		box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+.about {
+	h2 {
+		margin-top: 0;
 	}
 
-	&__content {
-		padding: 0 2rem;
+	p {
+		color: vars.$color-text;
+	}
 
-		h2 {
-			margin-top: 0;
-		}
+	&__image {
+		float: left;
+		width: 325px;
+		margin: 0 1.5rem 1rem 0;
+		border-radius: 8px;
+		box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+	}
+
+	&__content::after {
+		content: "";
+		display: block;
+		clear: both;
 	}
 }

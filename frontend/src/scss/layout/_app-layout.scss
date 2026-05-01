@@ -1,3 +1,5 @@
+@use "../base/variables" as vars;
+
 .app-shell {
 	max-width: 80rem;
 	margin: 0 auto;
@@ -17,23 +19,36 @@
 .app-header {
 	display: flex;
 	flex-direction: column;
+	border-bottom: 1px solid vars.$color-muted;
+	padding-bottom: 1.25rem;
+	gap: 0.35rem;
 
 	h1 {
-		font-size: 2.25rem;
-		margin: 0rem;
+		font-family: vars.$font-serif;
+		font-size: clamp(2.2rem, 3.5vw, 2.85rem);
+		color: vars.$color-green;
+		margin: 0;
+
+		line-height: 1.1;
+		letter-spacing: -0.015em;
+
+		text-shadow: 0 1px 1px rgba(0, 0, 0, 0.08);
 	}
 
 	.tagline {
 		margin: 0;
-		font-size: 1.25rem;
+
+		font-size: clamp(0.95rem, 1.4vw, 1.1rem);
+
+		font-family: vars.$font-serif;
 		font-style: italic;
 		font-weight: 400;
-		color: rgba(0, 0, 0, 0.65);
-	}
-}
 
-.app-header h1 {
-	margin: 0 0 0.35rem;
+		line-height: 1.4;
+		letter-spacing: 0.01em;
+
+		color: vars.$color-text-light;
+	}
 }
 
 .app-header p {

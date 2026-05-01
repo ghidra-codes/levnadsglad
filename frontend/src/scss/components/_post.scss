@@ -1,83 +1,165 @@
+@use "../base/mixins" as mixins;
+@use "../base/variables" as vars;
+
 .post {
 	padding: 1.5rem;
 	border-radius: 1.25rem;
-	background: rgba(255, 255, 255, 0.8);
-	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
-}
+	background: vars.$color-surface;
+	border: 1px solid vars.$color-muted;
+	box-shadow: 0 10px 24px rgba(47, 42, 38, 0.08);
 
-.post__header h2 {
-	margin: 0.35rem 0 0.4rem;
-}
-
-.post__section {
-	font-size: 0.85rem;
-	text-transform: uppercase;
-	letter-spacing: 0.08em;
-	color: rgba(0, 0, 0, 0.55);
-}
-
-.post__date {
-	margin: 0;
-	color: rgba(0, 0, 0, 0.6);
-}
-
-.post__paragraph {
-	margin: 0 0 1rem;
-}
-
-.post__content {
-	margin-top: 1.5rem;
-}
-
-.post__subheading {
-	margin: 1.75rem 0 0.75rem;
-}
-
-.post__quote {
-	margin: 1.5rem 0;
-	padding-left: 1rem;
-	border-left: 3px solid rgba(0, 0, 0, 0.18);
-	color: rgba(0, 0, 0, 0.72);
-}
-
-.post__figure {
-	margin: 1.75rem 0;
-}
-
-.post__image {
-	display: block;
-	width: 100%;
-	height: auto;
-	border-radius: 0.5rem;
-	box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
-}
-
-.post__caption {
-	margin-top: 0.55rem;
-	color: rgba(0, 0, 0, 0.62);
-	font-size: 0.95rem;
-	line-height: 1.45;
-}
-
-.post-reactions {
-	margin-top: 2rem;
-
-	&__list {
+	&__header {
 		display: flex;
-		gap: 0.5rem;
+		align-items: flex-start;
+		justify-content: space-between;
+
+		&-content {
+			display: flex;
+			flex-direction: column;
+			gap: 0.25rem;
+
+			h2 {
+				margin: 0.35rem 0 0.4rem;
+				color: vars.$color-text;
+			}
+		}
 	}
 
-	&__btn {
-		display: flex;
-		align-items: center;
-		gap: 0.35rem;
-		border-radius: 999px;
-		padding: 0.35rem 0.6rem;
-		border: 1px solid rgba(0, 0, 0, 0.1);
-		background: transparent;
+	&__category {
+		font-size: 0.85rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
 
-		&--active {
-			background: rgba(0, 0, 0, 0.08);
+		color: vars.$color-text-light;
+	}
+
+	&__share {
+		@include mixins.flex-center;
+		gap: 0.35rem;
+
+		color: vars.$color-text-light;
+
+		background: transparent;
+		border: none;
+		cursor: pointer;
+
+		&:hover {
+			color: vars.$color-gold;
+		}
+
+		svg {
+			width: 1.25rem;
+			height: 1.25rem;
+		}
+	}
+
+	&__date {
+		margin: 0;
+		color: vars.$color-text-light;
+	}
+
+	&__content {
+		margin-top: 1.5rem;
+	}
+
+	&__paragraph {
+		margin: 0 0 1rem;
+	}
+
+	&__subheading {
+		margin: 1.75rem 0 0.75rem;
+		color: vars.$color-text;
+	}
+
+	&__quote {
+		margin: 1.5rem 0;
+		padding-left: 1rem;
+		border-left: 3px solid vars.$color-gold;
+		color: vars.$color-text-light;
+	}
+
+	&__figure {
+		margin: 1.75rem 0;
+	}
+
+	&__image {
+		display: block;
+		width: 100%;
+		height: auto;
+		border-radius: 0.75rem;
+
+		box-shadow: 0 10px 24px rgba(47, 42, 38, 0.1);
+	}
+
+	&__caption {
+		margin-top: 0.55rem;
+		color: vars.$color-text-light;
+		font-size: 0.95rem;
+		line-height: 1.45;
+	}
+
+	&__footer {
+		margin-top: 2rem;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		a {
+			text-decoration: none;
+			@include mixins.flex-center;
+
+			padding: 0.3rem 0.75rem 0.325rem 0.75rem;
+			border-radius: 999px;
+
+			border: 1px solid vars.$color-muted;
+			color: vars.$color-text;
+
+			transition:
+				background 0.2s ease,
+				border-color 0.2s ease;
+
+			&:hover,
+			&:focus {
+				background: vars.$color-gold-soft;
+				border-color: vars.$color-gold;
+			}
+		}
+
+		.post-reactions {
+			&__list {
+				display: flex;
+				gap: 0.5rem;
+			}
+
+			&__btn {
+				@include mixins.flex-center;
+				gap: 0.35rem;
+				border-radius: 999px;
+				padding: 0.35rem 0.6rem;
+
+				border: 1px solid vars.$color-muted;
+				background: transparent;
+				font-size: 0.95rem;
+
+				color: vars.$color-text;
+
+				transition:
+					background 0.2s ease,
+					border-color 0.2s ease;
+
+				span {
+					@include mixins.flex-center;
+				}
+
+				&:hover {
+					background: vars.$color-gold-soft;
+				}
+
+				&--active {
+					background: vars.$color-gold-soft;
+					border-color: vars.$color-gold;
+				}
+			}
 		}
 	}
 }

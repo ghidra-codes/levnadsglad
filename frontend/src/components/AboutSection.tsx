@@ -13,9 +13,9 @@ const AboutSection = ({ data }: AboutSectionProps) => {
 
 	return (
 		<section className="about">
-			{imageUrl && <img src={imageUrl} alt={alt} className="about__image" />}
-
 			<div className="about__content">
+				{imageUrl && <img src={imageUrl} alt={alt} className="about__image" />}
+
 				<h2>{data.title}</h2>
 
 				<PortableText value={data.content} components={portableTextComponents} />

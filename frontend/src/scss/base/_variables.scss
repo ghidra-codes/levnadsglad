@@ -1,8 +1,22 @@
-$font-sans:
-	system-ui,
-	-apple-system,
-	"Segoe UI",
-	sans-serif;
+$font-sans: "IBM Plex Sans", sans-serif;
+$font-serif: "IBM Plex Serif", serif;
 
-$color-text: #1a1a1a;
-$color-bg: #ffffff;
+// PRIMARY EARTH TONES
+$color-bg: #f5f3ef;
+$color-surface: rgba(#ffffff, 0.85);
+$color-surface-gold: rgba(#efe3c2, 0.25);
+$color-muted: #e7e3dc;
+
+// TEXT
+$color-text: #2f2a26;
+$color-text-light: #6e665f;
+
+// ACCENTS
+$color-green: #7a9b76;
+$color-green-soft: #a8c3a2;
+
+$color-gold: #d1b47a;
+$color-gold-soft: #efe3c2;
+
+$color-amber: #c8a27a;
+$color-purple: #b7a7c8;
