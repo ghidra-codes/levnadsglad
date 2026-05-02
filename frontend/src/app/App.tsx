@@ -2,6 +2,7 @@ import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
 import decorBottom from "@/assets/svgs/decor-bottom.svg";
 import decorTop from "@/assets/svgs/decor-top.svg";
+import BackToTop from "@/components/BackToTop";
 import SideNav from "@/components/SideNav";
 import DiaryPage from "@/pages/DiaryPage";
 import HomePage from "@/pages/HomePage";
@@ -38,6 +39,8 @@ function App() {
 			<div className="app-decor">
 				<img src={decorBottom} className="app-decor__bottom" alt="" />
 			</div>
+
+			<BackToTop />
 
 			<Toaster
 				position="top-center"

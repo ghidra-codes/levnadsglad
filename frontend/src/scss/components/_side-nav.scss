@@ -2,7 +2,7 @@
 
 .side-nav {
 	position: sticky;
-	top: 1.5rem;
+	top: 1.85rem;
 	align-self: start;
 
 	&__inner {
@@ -25,7 +25,7 @@
 	}
 
 	&__toggle {
-		margin-top: 0.5rem;
+		margin-top: 0.75rem;
 		background: none;
 		border: none;
 		color: vars.$color-text-light;
@@ -33,6 +33,7 @@
 		cursor: pointer;
 
 		&:hover {
+			color: vars.$color-gold;
 			text-decoration: underline;
 		}
 	}
@@ -104,5 +105,14 @@
 
 	@media (max-width: 900px) {
 		position: static;
+
+		.side-nav__inner {
+			height: auto;
+			text-align: center;
+
+			.side-nav__category {
+				padding: 0.35rem 0.75rem;
+			}
+		}
 	}
 }

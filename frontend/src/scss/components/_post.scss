@@ -110,14 +110,16 @@
 		flex-wrap: wrap;
 		gap: 1rem;
 
-		a {
+		.post__mail {
 			text-decoration: none;
 			@include mixins.flex-center;
 
-			padding: 0.3rem 0.75rem 0.325rem 0.75rem;
+			padding: 0.3rem 0.8rem 0.325rem 0.8rem;
 			border-radius: 999px;
 
 			border: 1px solid vars.$color-muted;
+
+			font-size: 0.9rem;
 			color: vars.$color-text;
 
 			transition:

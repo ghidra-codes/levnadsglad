@@ -4,7 +4,7 @@
 .app-shell {
 	max-width: 80rem;
 	margin: 0 auto;
-	padding: 1rem;
+	padding: 1.25rem 1rem;
 }
 
 .app-layout {
@@ -107,6 +107,52 @@
 	}
 }
 
+.back-to-top {
+	position: fixed;
+	right: 2rem;
+	bottom: 2rem;
+	z-index: 1000;
+
+	@include mixins.flex-center;
+	gap: 0.4rem;
+
+	font-size: 0.95rem;
+	padding: 0.6rem 1rem;
+	border-radius: 999px;
+
+	background: #fff;
+	border: 1px solid vars.$color-muted;
+
+	box-shadow: vars.$shadow-soft;
+
+	opacity: 0;
+	pointer-events: none;
+
+	transition: all 0.25s ease;
+
+	transform: translate(0, 10px);
+
+	&.is-visible {
+		transform: translate(0, 0);
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	&.is-scrolling {
+		transform: translate(0, -2px);
+		border-color: vars.$color-gold;
+		box-shadow: 0 0 0 2px rgba(vars.$color-gold, 0.25);
+	}
+
+	&:hover {
+		transform: translate(0, -2px);
+	}
+
+	&:active {
+		border-color: vars.$color-gold;
+	}
+}
+
 @media (max-width: 900px) {
 	.app-layout {
 		grid-template-columns: 1fr;
@@ -114,5 +160,25 @@
 
 	.app-main {
 		margin-top: 0.25rem;
+	}
+
+	.back-to-top {
+		left: 50%;
+		right: auto;
+		bottom: 1.5rem;
+
+		transform: translate(-50%, 10px);
+
+		&.is-visible {
+			transform: translate(-50%, 0);
+		}
+
+		&.is-scrolling {
+			transform: translate(-50%, -2px);
+		}
+
+		&:hover {
+			transform: translate(-50%, -2px);
+		}
 	}
 }
