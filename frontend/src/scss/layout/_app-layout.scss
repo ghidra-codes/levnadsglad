@@ -1,15 +1,18 @@
 @use "../base/variables" as vars;
+@use "../base/mixins" as mixins;
 
 .app-shell {
 	max-width: 80rem;
 	margin: 0 auto;
-	padding: 2rem 1rem;
+	padding: 1rem;
 }
 
 .app-layout {
 	display: grid;
 	grid-template-columns: minmax(240px, 280px) minmax(0, 1fr);
 	gap: 2rem;
+	border-bottom: 1px solid vars.$color-muted;
+	padding-bottom: 2rem;
 }
 
 .app-content {
@@ -19,9 +22,10 @@
 .app-header {
 	display: flex;
 	flex-direction: column;
-	border-bottom: 1px solid vars.$color-muted;
-	padding-bottom: 1.25rem;
 	gap: 0.35rem;
+	padding-bottom: 1.25rem;
+	border-bottom: 1px solid vars.$color-muted;
+	margin-bottom: 1.25rem;
 
 	h1 {
 		font-family: vars.$font-serif;
@@ -74,11 +78,40 @@
 }
 
 .app-main {
-	margin-top: 2rem;
+	margin-top: 1.5rem;
+}
+
+.app-decor {
+	@include mixins.flex-center;
+	margin: 0 auto;
+	pointer-events: none;
+
+	&__top {
+		width: 150px;
+		margin-bottom: 0.75rem;
+
+		@media (max-width: 500px) {
+			width: 120px;
+			margin-bottom: 1.75rem;
+		}
+	}
+
+	&__bottom {
+		width: 115px;
+		padding-top: 1rem;
+
+		@media (max-width: 500px) {
+			width: 90px;
+		}
+	}
 }
 
 @media (max-width: 900px) {
 	.app-layout {
 		grid-template-columns: 1fr;
+	}
+
+	.app-main {
+		margin-top: 0.25rem;
 	}
 }

@@ -1,7 +1,6 @@
 @use "../base/variables" as vars;
 
 .diary-latest {
-	margin-top: 2rem;
 	padding-top: 1.5rem;
 	border-top: 1px solid vars.$color-muted;
 }
@@ -33,7 +32,7 @@
 			margin: 0;
 			color: vars.$color-text-light;
 			text-transform: uppercase;
-			letter-spacing: 0.08em;
+			letter-spacing: 0.05em;
 		}
 	}
 

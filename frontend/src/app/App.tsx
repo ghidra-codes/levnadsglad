@@ -1,5 +1,7 @@
 import { Toaster } from "react-hot-toast";
 import { Route, Routes } from "react-router-dom";
+import decorBottom from "@/assets/svgs/decor-bottom.svg";
+import decorTop from "@/assets/svgs/decor-top.svg";
 import SideNav from "@/components/SideNav";
 import DiaryPage from "@/pages/DiaryPage";
 import HomePage from "@/pages/HomePage";
@@ -9,13 +11,19 @@ import PostPage from "@/pages/PostPage";
 function App() {
 	return (
 		<div className="app-shell">
+			<div className="app-decor">
+				<img src={decorTop} className="app-decor__top" alt="" />
+			</div>
+
+			<header className="app-header">
+				<h1>Levnadsglad</h1>
+				<p className="tagline">Dagböcker och textsamlingar av Ninna Kallin</p>
+			</header>
+
 			<div className="app-layout">
 				<SideNav />
+
 				<div className="app-content">
-					<header className="app-header">
-						<h1>Levnadsglad</h1>
-						<p className="tagline">Dagböcker och textsamlingar av Ninna Kallin</p>
-					</header>
 					<main className="app-main">
 						<Routes>
 							<Route path="/" element={<HomePage />} />
@@ -26,15 +34,23 @@ function App() {
 					</main>
 				</div>
 			</div>
+
+			<div className="app-decor">
+				<img src={decorBottom} className="app-decor__bottom" alt="" />
+			</div>
+
 			<Toaster
 				position="top-center"
 				toastOptions={{
 					duration: 2500,
 					style: {
-						background: "#222",
-						color: "#fff",
-						borderRadius: "12px",
+						background: "rgba(255, 255, 255, 0.85)",
+						color: "#2f2a26",
+						border: "1px solid #e7e3dc",
+						borderRadius: "10px",
 						padding: "10px 14px",
+						boxShadow: "0 6px 16px rgba(47, 42, 38, 0.06)",
+						backdropFilter: "blur(6px)",
 					},
 				}}
 			/>

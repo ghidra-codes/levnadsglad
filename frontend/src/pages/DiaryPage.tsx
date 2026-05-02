@@ -1,4 +1,5 @@
 import { useEffect, useMemo } from "react";
+import { PiArrowFatLeft, PiArrowFatRight } from "react-icons/pi";
 import { Link, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import Post from "@/components/Post";
 import usePostsByCategory from "@/hooks/data/usePostsByCategory";
@@ -130,7 +131,7 @@ const DiaryPage = () => {
 								disabled={safePage === 1}
 								onClick={() => handlePageChange(safePage - 1)}
 							>
-								Föregående
+								<PiArrowFatLeft />
 							</button>
 							<span>
 								Sida {safePage} av {pageCount}
@@ -140,7 +141,7 @@ const DiaryPage = () => {
 								disabled={safePage === pageCount}
 								onClick={() => handlePageChange(safePage + 1)}
 							>
-								Nästa
+								<PiArrowFatRight />
 							</button>
 						</div>
 					) : null}
@@ -158,7 +159,7 @@ const DiaryPage = () => {
 								disabled={safePage === 1}
 								onClick={() => handlePageChange(safePage - 1)}
 							>
-								Föregående
+								<PiArrowFatLeft />
 							</button>
 							<span>
 								Sida {safePage} av {pageCount}
@@ -168,7 +169,7 @@ const DiaryPage = () => {
 								disabled={safePage === pageCount}
 								onClick={() => handlePageChange(safePage + 1)}
 							>
-								Nästa
+								<PiArrowFatRight />
 							</button>
 						</div>
 					) : null}
