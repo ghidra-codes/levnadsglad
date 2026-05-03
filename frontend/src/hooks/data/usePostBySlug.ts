@@ -7,7 +7,6 @@ const usePostBySlug = (slug: string) => {
 		["post", slug],
 		postBySlugQuery,
 		{
-			placeholderData: null,
 			enabled: Boolean(slug),
 		},
 		{

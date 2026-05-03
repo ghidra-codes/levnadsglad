@@ -2,6 +2,8 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import useCategoryGroups from "@/hooks/data/useCategoryGroups";
 import { buildDiaryPath } from "@/lib/utils/helpers";
+import ErrorMessage from "./ErrorMessage";
+import Loader from "./Loader";
 
 // CONFIG
 const INITIAL_VISIBLE = 10;
@@ -24,12 +26,12 @@ const SideNav = () => {
 		<aside className="side-nav">
 			<nav className="side-nav__inner" aria-label="Dagböcker">
 				{/* STATUS */}
-				{isLoading && <p className="side-nav__status">Laddar dagböcker...</p>}
-				{isError && <p className="side-nav__status">Kunde inte hämta dagböcker.</p>}
+				{isLoading && <Loader size={"small"} />}
+				{isError && <ErrorMessage message="Kunde inte ladda dagböckerna. Försök igen." />}
 
 				{/* EMPTY */}
 				{!isLoading && !isError && groups.length === 0 && (
-					<p className="side-nav__status">Inga dagböcker hittades.</p>
+					<p className="side-nav__status">Inga dagböcker hittades...</p>
 				)}
 
 				{/* GROUPS */}

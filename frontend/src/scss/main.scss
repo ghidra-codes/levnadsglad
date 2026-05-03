@@ -7,6 +7,8 @@
 @use "./components/latest-diary";
 @use "./components/post";
 @use "./components/about-section";
+@use "./components/loader";
+@use "./components/error-message";
 
 @use "./pages/page";
 @use "./pages/diary";

@@ -30,6 +30,7 @@ function App() {
 							<Route path="/" element={<HomePage />} />
 							<Route path="/post/:slug" element={<PostPage />} />
 							<Route path="/diary/:categorySlug" element={<DiaryPage />} />
+
 							<Route path="*" element={<NotFoundPage />} />
 						</Routes>
 					</main>

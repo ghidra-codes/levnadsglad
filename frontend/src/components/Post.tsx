@@ -2,9 +2,13 @@ import { PortableText } from "@portabletext/react";
 import toast from "react-hot-toast";
 import { PiLink } from "react-icons/pi";
 import { extractParagraphs, formatDate } from "@/lib/utils/helpers";
-import type { PostProps } from "@/types/props.types";
+import type { Post } from "@/types/post.types";
 import PostReactions from "./PostReactions";
 import portableTextComponents from "./utils/portableTextComponents";
+
+interface PostProps {
+	post: Post;
+}
 
 const Post = ({ post }: PostProps) => {
 	const paragraphs = extractParagraphs(post.content);

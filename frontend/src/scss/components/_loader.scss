@@ -1,0 +1,21 @@
+.loader {
+	border-radius: 50%;
+
+	border: 2px solid rgba(0, 0, 0, 0.08);
+	border-top-color: rgba(0, 0, 0, 0.35);
+
+	animation: spin 0.7s linear infinite;
+}
+
+.loader-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 2rem 0;
+}
+
+@keyframes spin {
+	to {
+		transform: rotate(360deg);
+	}
+}

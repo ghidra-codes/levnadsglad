@@ -1,6 +1,5 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import usePostList from "@/hooks/data/usePostList";
 import {
 	buildDiaryPath,
 	buildExcerpt,
@@ -8,12 +7,13 @@ import {
 	extractParagraphs,
 	formatDate,
 } from "@/lib/utils/helpers";
-import type { PostListItem } from "@/types/post.types";
+import type { Post, PostListItem } from "@/types/post.types";
 
-const LatestDiary = () => {
-	const { data: posts = [], isLoading, isError, error } = usePostList();
+interface LatestDiaryProps {
+	posts: Post[];
+}
 
-	// DERIVE ITEMS
+const LatestDiary = ({ posts }: LatestDiaryProps) => {
 	const items = useMemo<PostListItem[]>(() => {
 		return posts.map((post) => ({
 			...post,
@@ -31,23 +31,6 @@ const LatestDiary = () => {
 
 		return items.filter((post) => post.category?.slug === latestCategory.slug).slice(0, 6);
 	}, [items, latestCategory]);
-
-	if (isLoading) {
-		return (
-			<section className="post-latest">
-				<p>Laddar senaste dagboken...</p>
-			</section>
-		);
-	}
-
-	if (isError) {
-		console.error(error);
-		return (
-			<section className="post-latest">
-				<p>Kunde inte hämta senaste dagboken.</p>
-			</section>
-		);
-	}
 
 	return (
 		<section className="diary-latest">
