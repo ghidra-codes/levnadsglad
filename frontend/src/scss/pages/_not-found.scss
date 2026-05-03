@@ -1,0 +1,8 @@
+.page--not-found img {
+	max-width: 18rem;
+
+	@media (max-width: 600px) {
+		max-width: 15rem;
+		margin: 0 auto;
+	}
+}

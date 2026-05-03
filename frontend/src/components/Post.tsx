@@ -43,6 +43,7 @@ const Post = ({ post }: PostProps) => {
 					Kopiera länk <PiLink />
 				</button>
 			</header>
+
 			{post.content?.length ? (
 				<div className="post__content">
 					<PortableText value={post.content} components={portableTextComponents} />
@@ -55,6 +56,7 @@ const Post = ({ post }: PostProps) => {
 						</p>
 					))
 				: null}
+
 			<footer className="post__footer">
 				<PostReactions postId={post._id} />
 
