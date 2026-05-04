@@ -1,7 +1,6 @@
 import { visionTool } from "@sanity/vision";
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import Logo from "./components/Logo";
 import { schemaTypes } from "./schemaTypes";
 import { structure } from "./structure";
 
@@ -13,12 +12,6 @@ export default defineConfig({
 	dataset: "production",
 
 	plugins: [structureTool({ structure }), visionTool()],
-
-	studio: {
-		components: {
-			logo: Logo,
-		},
-	},
 
 	i18n: {
 		locales: [
