@@ -40,6 +40,7 @@
 
 	&__share {
 		@include mixins.flex-center;
+		min-width: 7rem;
 		padding: 0;
 
 		color: vars.$color-text-light;
