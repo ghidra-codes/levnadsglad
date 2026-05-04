@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import PageState from "@/components/PageState";
 import Pagination from "@/components/Pagination";
@@ -15,6 +15,8 @@ const getPostAnchor = (post: PostListItem): string => `post-${post.slug ?? post.
 const DiaryPage = () => {
 	const { categorySlug } = useParams();
 	const navigate = useNavigate();
+
+	const pageRef = useRef<HTMLElement | null>(null);
 
 	const slug = categorySlug ? decodeURIComponent(categorySlug) : "";
 
@@ -35,10 +37,26 @@ const DiaryPage = () => {
 		if (slug) navigate(buildPostPath(slug));
 	};
 
+	// biome-ignore lint/correctness/useExhaustiveDependencies: scrolling on category change
+	useEffect(() => {
+		if (isLoading) return;
+
+		const isMobile = window.innerWidth <= 900;
+
+		if (isMobile) {
+			pageRef.current?.scrollIntoView({
+				behavior: "smooth",
+				block: "start",
+			});
+		} else {
+			window.scrollTo({ top: 0 });
+		}
+	}, [slug, isLoading]);
+
 	if (!isLoading && !isError && !categoryFromCache) return <NotFoundPage />;
 
 	return (
-		<section className="page page--diary">
+		<section ref={pageRef} className="page page--diary">
 			<Link className="page__back" to="/">
 				Tillbaka till startsidan
 			</Link>

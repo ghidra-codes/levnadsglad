@@ -61,7 +61,6 @@ const SideNav = () => {
 															: "side-nav__category"
 													}
 													to={buildDiaryPath(category.slug)}
-													onClick={() => window.scrollTo({ top: 0 })}
 												>
 													<span className="side-nav__title">{category.title}</span>
 
