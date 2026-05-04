@@ -13,6 +13,11 @@
 		align-items: flex-start;
 		justify-content: space-between;
 
+		@media (max-width: 500px) {
+			flex-direction: column;
+			gap: 0.75rem;
+		}
+
 		&-content {
 			display: flex;
 			flex-direction: column;
@@ -35,7 +40,7 @@
 
 	&__share {
 		@include mixins.flex-center;
-		min-width: 7rem;
+		padding: 0;
 
 		color: vars.$color-text-light;
 
