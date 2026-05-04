@@ -1,25 +1,29 @@
 import type { Rule } from "sanity";
+import { slugify } from "./utils/slugify";
 
 export default {
 	name: "categoryGroup",
 	type: "document",
-	title: "Category Group",
+	title: "Kategorigrupp",
 	fields: [
 		{
 			name: "title",
 			type: "string",
+			title: "Titel",
 			validation: (Rule: Rule) => Rule.required(),
 		},
 		{
 			name: "slug",
 			type: "slug",
-			options: { source: "title" },
+			title: "Slug",
+			readOnly: true,
+			options: { source: "title", slugify },
 			validation: (Rule: Rule) => Rule.required(),
 		},
 		{
 			name: "order",
 			type: "number",
-			title: "Order",
+			title: "Ordning",
 		},
 	],
 };

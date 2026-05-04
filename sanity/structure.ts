@@ -2,17 +2,17 @@ import type { StructureBuilder } from "sanity/structure";
 
 export const structure = (S: StructureBuilder) =>
 	S.list()
-		.title("Content")
+		.title("Innehåll")
 		.items([
 			S.listItem()
-				.title("About Section")
+				.title("Om mig")
 				.child(S.document().schemaType("aboutSection").documentId("aboutSection")),
 
 			S.divider(),
 
-			S.listItem().title("Posts").child(S.documentTypeList("post")),
+			S.listItem().title("Inlägg").child(S.documentTypeList("post")),
 
-			S.listItem().title("Categories").child(S.documentTypeList("category")),
+			S.listItem().title("Kategorier").child(S.documentTypeList("category")),
 
-			S.listItem().title("Category Groups").child(S.documentTypeList("categoryGroup")),
+			S.listItem().title("Kategorigrupper").child(S.documentTypeList("categoryGroup")),
 		]);

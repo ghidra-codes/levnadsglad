@@ -1,12 +1,15 @@
+import { slugify } from "./utils/slugify";
+
 // POST SCHEMA
 export default {
 	name: "post",
 	type: "document",
-	title: "Post",
+	title: "Inlägg",
 	fields: [
 		{
 			name: "title",
 			type: "string",
+			title: "Titel",
 			options: {
 				search: { weight: 10 },
 			},
@@ -14,14 +17,22 @@ export default {
 		{
 			name: "slug",
 			type: "slug",
-			options: { source: "title" },
+			title: "Slug",
+			readOnly: true,
+			options: { source: "title", slugify },
 		},
-		{ name: "publishedAt", type: "datetime" },
+		{
+			name: "publishedAt",
+			type: "datetime",
+			title: "Publicerad",
+			initialValue: () => new Date().toISOString(),
+		},
 
 		// CATEGORY
 		{
 			name: "category",
 			type: "reference",
+			title: "Kategori",
 			to: [{ type: "category" }],
 			validation: (Rule: any) => Rule.required(),
 		},
@@ -29,6 +40,7 @@ export default {
 		{
 			name: "content",
 			type: "array",
+			title: "Innehåll",
 			of: [
 				{ type: "block" },
 				{
@@ -38,13 +50,13 @@ export default {
 						{
 							name: "alt",
 							type: "string",
-							title: "Alternative text",
-							description: "Describe the image for visitors using screen readers.",
+							title: "Alternativ text",
+							description: "Beskriv bilden för besökare som använder skärmläsare.",
 						},
 						{
 							name: "caption",
 							type: "string",
-							title: "Caption",
+							title: "Bildtext",
 						},
 					],
 				},

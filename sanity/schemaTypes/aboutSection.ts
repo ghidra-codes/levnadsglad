@@ -3,13 +3,13 @@ import type { Rule } from "sanity";
 export default {
 	name: "aboutSection",
 	type: "document",
-	title: "About Section",
+	title: "Om mig",
 
 	fields: [
 		{
 			name: "title",
 			type: "string",
-			title: "Title",
+			title: "Rubrik",
 			initialValue: "Lite om mig",
 			validation: (Rule: Rule) => Rule.required(),
 		},
@@ -17,7 +17,7 @@ export default {
 		{
 			name: "content",
 			type: "array",
-			title: "Content",
+			title: "Innehåll",
 			of: [{ type: "block" }],
 			validation: (Rule: Rule) => Rule.required(),
 		},
@@ -26,7 +26,7 @@ export default {
 		{
 			name: "aboutImage",
 			type: "image",
-			title: "About Image",
+			title: "Bild",
 			options: {
 				hotspot: true,
 			},
@@ -34,7 +34,7 @@ export default {
 				{
 					name: "alt",
 					type: "string",
-					title: "Alt text",
+					title: "Alt-text",
 					validation: (Rule: Rule) => Rule.required(),
 				},
 			],
