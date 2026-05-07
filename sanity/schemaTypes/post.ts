@@ -1,3 +1,4 @@
+import AudioUploadInput from "../components/AudioUploadInput";
 import { slugify } from "./utils/slugify";
 
 // POST SCHEMA
@@ -61,6 +62,39 @@ export default {
 					],
 				},
 			],
+		},
+
+		{
+			name: "audio",
+			title: "Ljudfil",
+			type: "object",
+
+			fields: [
+				{
+					name: "url",
+					type: "string",
+				},
+				{
+					name: "storage_path",
+					type: "string",
+					readOnly: true,
+				},
+				{
+					name: "file_name",
+					type: "string",
+					readOnly: true,
+				},
+
+				{
+					name: "file_size",
+					type: "number",
+					readOnly: true,
+				},
+			],
+
+			components: {
+				input: AudioUploadInput,
+			},
 		},
 	],
 
