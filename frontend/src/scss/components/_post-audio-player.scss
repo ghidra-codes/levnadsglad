@@ -1,0 +1,86 @@
+@use "../base/variables" as vars;
+
+.post-audio-player {
+	margin: 2rem 0;
+	padding: 1rem;
+
+	border-radius: 1.25rem;
+
+	background: vars.$color-surface;
+	border: 1px solid vars.$color-muted;
+
+	box-shadow: vars.$shadow-soft;
+	backdrop-filter: blur(10px);
+
+	.rhap_container {
+		padding: 0;
+
+		background: transparent;
+		box-shadow: none;
+
+		font-family: vars.$font-sans;
+		color: vars.$color-text;
+	}
+
+	.rhap_main-controls-button,
+	.rhap_volume-button,
+	.rhap_button-clear {
+		color: vars.$color-green;
+		transition: color 0.2s ease;
+
+		&:hover {
+			color: vars.$color-green-soft;
+		}
+	}
+
+	.rhap_volume-controls {
+		justify-content: flex-start;
+		margin-left: 0.75rem;
+	}
+
+	.rhap_additional-controls {
+		display: none;
+	}
+
+	.rhap_main-controls-button {
+		width: 3rem;
+		height: 3rem;
+
+		svg {
+			width: 100%;
+			height: 100%;
+		}
+	}
+
+	.rhap_progress-filled,
+	.rhap_volume-filled {
+		background-color: vars.$color-green;
+	}
+
+	.rhap_progress-indicator,
+	.rhap_volume-indicator {
+		background-color: vars.$color-green;
+
+		box-shadow: 0 0 0 2px vars.$color-surface;
+	}
+
+	.rhap_progress-bar,
+	.rhap_volume-bar {
+		background-color: vars.$color-muted;
+	}
+
+	.rhap_time {
+		font-size: 0.85rem;
+		color: vars.$color-text-light;
+	}
+
+	.rhap_download-progress {
+		background-color: rgba(vars.$color-green, 0.15);
+	}
+
+	@media (max-width: 600px) {
+		.rhap_controls-section {
+			margin-bottom: 12px;
+		}
+	}
+}

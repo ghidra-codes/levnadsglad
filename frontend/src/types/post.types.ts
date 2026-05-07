@@ -41,6 +41,11 @@ export interface Post {
 	section?: string;
 	publishedAt?: string;
 	content?: PostContent[];
+	audio?: {
+		url: string;
+		file_name: string;
+		file_size: number;
+	};
 }
 
 // DERIVED TYPE

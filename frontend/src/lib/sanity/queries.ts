@@ -39,7 +39,8 @@ export const postListQuery = `*[_type == "post"] | order(publishedAt desc) {
 		"slug": slug.current,
 		order
 	},
-	content
+	content,
+	audio
 }`;
 
 export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0] {
@@ -54,7 +55,8 @@ export const postBySlugQuery = `*[_type == "post" && slug.current == $slug][0] {
 		"slug": slug.current,
 		order
 	},
-	content
+	content,
+	audio
 }`;
 
 export const postsByCategoryQuery = `*[
@@ -72,7 +74,8 @@ export const postsByCategoryQuery = `*[
 		"slug": slug.current,
 		order
 	},
-	content
+	content,
+	audio
 }`;
 
 export const diaryNavQuery = `*[_type == "post" && defined(category)]

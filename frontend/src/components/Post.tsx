@@ -3,6 +3,7 @@ import toast from "react-hot-toast";
 import { PiLink } from "react-icons/pi";
 import { extractParagraphs, formatDate } from "@/lib/utils/helpers";
 import type { Post } from "@/types/post.types";
+import PostAudioPlayer from "./PostAudioPlayer";
 import PostReactions from "./PostReactions";
 import portableTextComponents from "./utils/portableTextComponents";
 
@@ -49,6 +50,7 @@ const Post = ({ post }: PostProps) => {
 					<PortableText value={post.content} components={portableTextComponents} />
 				</div>
 			) : null}
+
 			{!post.content?.length && paragraphs.length > 0
 				? paragraphs.map((paragraph, index) => (
 						<p key={`${post._id}-paragraph-${index}`} className="post__paragraph">
@@ -56,6 +58,12 @@ const Post = ({ post }: PostProps) => {
 						</p>
 					))
 				: null}
+
+			{post.audio?.url && (
+				<div className="post__audio">
+					<PostAudioPlayer src={post.audio.url} />
+				</div>
+			)}
 
 			<footer className="post__footer">
 				<PostReactions postId={post._id} />
