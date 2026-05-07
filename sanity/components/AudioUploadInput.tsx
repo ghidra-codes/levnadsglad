@@ -21,6 +21,10 @@ const AudioUploadInput = ({ value, onChange }: Props) => {
 
 	// HANDLERS
 
+	const resetInput = () => {
+		if (input_ref.current) input_ref.current.value = "";
+	};
+
 	const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
 		const file = event.target.files?.[0];
 
@@ -71,6 +75,8 @@ const AudioUploadInput = ({ value, onChange }: Props) => {
 					file_size: file.size,
 				}),
 			);
+
+			resetInput();
 		} catch (error) {
 			console.error(error);
 
@@ -94,10 +100,12 @@ const AudioUploadInput = ({ value, onChange }: Props) => {
 			}
 
 			onChange(unset());
+			resetInput();
 		} catch (error) {
 			console.error(error);
 
 			alert(error instanceof Error ? error.message : "Failed to delete audio.");
+			resetInput();
 		}
 	};
 
