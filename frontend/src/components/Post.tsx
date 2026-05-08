@@ -40,7 +40,12 @@ const Post = ({ post }: PostProps) => {
 					{publishedLabel ? <p className="post__date">{publishedLabel}</p> : null}
 				</div>
 
-				<button className="post__share" onClick={handleShare}>
+				<button
+					className="post__share"
+					onClick={handleShare}
+					type="button"
+					aria-label="Kopiera länk till inlägget"
+				>
 					Kopiera länk <PiLink />
 				</button>
 			</header>

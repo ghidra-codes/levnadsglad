@@ -1,3 +1,4 @@
+import type { Rule } from "sanity";
 import { slugify } from "./utils/slugify";
 
 export default {
@@ -9,7 +10,7 @@ export default {
 			name: "title",
 			type: "string",
 			title: "Titel",
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: Rule) => Rule.required(),
 		},
 		{
 			name: "subtitle",
@@ -22,13 +23,13 @@ export default {
 			title: "Slug",
 			readOnly: true,
 			options: { source: "title", slugify },
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: Rule) => Rule.required(),
 		},
 		{
 			name: "order",
 			type: "number",
 			title: "Ordning",
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: Rule) => Rule.required(),
 		},
 		{
 			name: "group",

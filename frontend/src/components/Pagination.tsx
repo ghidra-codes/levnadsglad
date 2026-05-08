@@ -12,7 +12,12 @@ const Pagination = ({ currentPage, pageCount, onPageChange, bottom }: Pagination
 
 	return (
 		<div className={`diary-pagination ${bottom ? "bottom" : ""}`} aria-label="Sidnavigering">
-			<button type="button" disabled={currentPage === 1} onClick={() => onPageChange(currentPage - 1)}>
+			<button
+				type="button"
+				disabled={currentPage === 1}
+				onClick={() => onPageChange(currentPage - 1)}
+				aria-label="Föregående sida"
+			>
 				<PiArrowFatLeft />
 			</button>
 
@@ -24,6 +29,7 @@ const Pagination = ({ currentPage, pageCount, onPageChange, bottom }: Pagination
 				type="button"
 				disabled={currentPage === pageCount}
 				onClick={() => onPageChange(currentPage + 1)}
+				aria-label="Nästa sida"
 			>
 				<PiArrowFatRight />
 			</button>

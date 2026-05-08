@@ -18,15 +18,6 @@ export const categoryGroupsQuery = `*[_type == "categoryGroup"]
   }
 }`;
 
-export const categoriesQuery = `*[_type == "category"]
-| order(order asc) {
-	_id,
-	title,
-	subtitle,
-	"slug": slug.current,
-	order
-}`;
-
 export const postListQuery = `*[_type == "post"] | order(publishedAt desc) {
 	_id,
 	title,
@@ -76,21 +67,6 @@ export const postsByCategoryQuery = `*[
 	},
 	content,
 	audio
-}`;
-
-export const diaryNavQuery = `*[_type == "post" && defined(category)]
-| order(category->order asc, publishedAt desc) {
-	_id,
-	title,
-	"slug": slug.current,
-	publishedAt,
-	"category": category->{
-		_id,
-		title,
-	    subtitle,
-		"slug": slug.current,
-		order
-	}
 }`;
 
 export const aboutQuery = `

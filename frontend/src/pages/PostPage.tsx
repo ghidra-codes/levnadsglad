@@ -10,20 +10,20 @@ const PostPage = () => {
 
 	const resolvedSlug = slug ?? "";
 
-	const { data: post = null, isLoading, isError } = usePostBySlug(resolvedSlug);
+	const { data: post, isLoading, isError, isFetched } = usePostBySlug(resolvedSlug);
 
 	const handleBack = () => {
 		if (window.history.length > 1) navigate(-1);
 		else navigate("/");
 	};
 
-	if (!isLoading && !isError && !post) {
+	if (isFetched && !isLoading && !isError && post === null) {
 		return <NotFoundPage />;
 	}
 
 	return (
 		<section className="page page--post">
-			<button className="page__back" onClick={handleBack}>
+			<button className="page__back" onClick={handleBack} type="button">
 				Tillbaka till föregående sida
 			</button>
 

@@ -9,7 +9,7 @@ import Loader from "./Loader";
 const INITIAL_VISIBLE = 10;
 
 const SideNav = () => {
-	const { data: groups = [], isLoading, isError } = useCategoryGroups();
+	const { data: groups, isLoading, isError } = useCategoryGroups();
 
 	// STATE: track expanded groups
 	const [expandedGroups, setExpandedGroups] = useState<Record<string, boolean>>({});
@@ -22,24 +22,29 @@ const SideNav = () => {
 		}));
 	};
 
+	if (groups === null) return null;
+
+	const isLoadingGroups = isLoading || groups === undefined;
+
 	return (
 		<aside className="side-nav">
 			<nav className="side-nav__inner" aria-label="Dagböcker">
 				{/* STATUS */}
-				{isLoading && <Loader size={"small"} />}
+				{isLoadingGroups && <Loader size={"small"} />}
 				{isError && <ErrorMessage message="Kunde inte ladda dagböckerna. Försök igen." />}
 
 				{/* EMPTY */}
-				{!isLoading && !isError && groups.length === 0 && (
+				{!isLoadingGroups && !isError && groups.length === 0 && (
 					<p className="side-nav__status">Inga dagböcker hittades...</p>
 				)}
 
 				{/* GROUPS */}
-				{groups.length > 0 && (
+				{Array.isArray(groups) && groups.length > 0 && (
 					<ul className="side-nav__groups">
 						{groups.map((group) => {
 							const isExpanded = expandedGroups[group._id];
 							const categories = group.categories || [];
+							const listId = `side-nav-group-${group._id}`;
 
 							const visibleCategories = isExpanded
 								? categories
@@ -51,7 +56,7 @@ const SideNav = () => {
 								<li key={group._id} className="side-nav__group">
 									<h2 className="side-nav__group-title">{group.title}</h2>
 
-									<ul className="side-nav__list">
+									<ul className="side-nav__list" id={listId}>
 										{visibleCategories.map((category) => (
 											<li key={category._id}>
 												<NavLink
@@ -78,6 +83,9 @@ const SideNav = () => {
 									{hasOverflow && (
 										<button
 											className="side-nav__toggle"
+											type="button"
+											aria-expanded={isExpanded}
+											aria-controls={listId}
 											onClick={() => toggleGroup(group._id)}
 										>
 											{isExpanded ? "Visa färre" : "Visa fler"}

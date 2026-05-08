@@ -33,6 +33,7 @@ const BackToTop = () => {
 				${isScrolling ? "is-scrolling" : ""}
 			`}
 			onClick={handleClick}
+			type="button"
 			aria-label="Tillbaka till toppen"
 		>
 			<PiArrowFatUp /> Till toppen

@@ -17,12 +17,16 @@ type Props = ObjectInputProps<AudioValue> & {
 
 const AudioUploadInput = ({ value, onChange }: Props) => {
 	const [uploading, setUploading] = useState(false);
-	const input_ref = useRef<HTMLInputElement | null>(null);
+	const [errorMessage, setErrorMessage] = useState<string | null>(null);
+	const inputRef = useRef<HTMLInputElement | null>(null);
+
+	const maxFileSize = 50 * 1024 * 1024;
+	const allowedMimeType = "audio/mpeg";
 
 	// HANDLERS
 
 	const resetInput = () => {
-		if (input_ref.current) input_ref.current.value = "";
+		if (inputRef.current) inputRef.current.value = "";
 	};
 
 	const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -30,47 +34,47 @@ const AudioUploadInput = ({ value, onChange }: Props) => {
 
 		if (!file) return;
 
+		setErrorMessage(null);
+
 		// VALIDATION
 
-		if (file.type !== "audio/mpeg") {
-			alert("Only MP3 files are allowed.");
+		if (file.type !== allowedMimeType) {
+			setErrorMessage("Endast MP3-filer kan laddas upp.");
+			resetInput();
 			return;
 		}
 
-		if (file.size > 50 * 1024 * 1024) {
-			alert("File must be under 50 MB.");
+		if (file.size > maxFileSize) {
+			setErrorMessage("Ljudfilen får inte vara större än 50 MB.");
+			resetInput();
 			return;
 		}
 
 		try {
 			setUploading(true);
 
-			const file_extension = file.name.split(".").pop();
+			const fileExtension = file.name.split(".").pop();
 
-			if (!file_extension) {
-				throw new Error("Invalid file extension.");
-			}
+			if (!fileExtension) throw new Error("Invalid file extension.");
 
-			const storage_path = `${crypto.randomUUID()}.${file_extension}`;
+			const storagePath = `${crypto.randomUUID()}.${fileExtension}`;
 
 			// UPLOAD
 
-			const { error: upload_error } = await supabase.storage.from("audio").upload(storage_path, file);
+			const { error: uploadError } = await supabase.storage.from("audio").upload(storagePath, file);
 
-			if (upload_error) {
-				throw upload_error;
-			}
+			if (uploadError) throw uploadError;
 
 			// GET PUBLIC URL
 
-			const { data } = supabase.storage.from("audio").getPublicUrl(storage_path);
+			const { data } = supabase.storage.from("audio").getPublicUrl(storagePath);
 
 			// SAVE TO SANITY
 
 			onChange(
 				set({
 					url: data.publicUrl,
-					storage_path,
+					storage_path: storagePath,
 					file_name: file.name,
 					file_size: file.size,
 				}),
@@ -78,33 +82,29 @@ const AudioUploadInput = ({ value, onChange }: Props) => {
 
 			resetInput();
 		} catch (error) {
-			console.error(error);
-
-			alert(error instanceof Error ? error.message : "Failed to upload audio.");
+			setErrorMessage(error instanceof Error ? error.message : "Kunde inte ladda upp ljudfilen.");
 		} finally {
 			setUploading(false);
 		}
 	};
 
 	const handleRemove = async () => {
+		setErrorMessage(null);
+
 		if (!value?.storage_path) {
 			onChange(unset());
 			return;
 		}
 
 		try {
-			const { error: remove_error } = await supabase.storage.from("audio").remove([value.storage_path]);
+			const { error: removeError } = await supabase.storage.from("audio").remove([value.storage_path]);
 
-			if (remove_error) {
-				throw remove_error;
-			}
+			if (removeError) throw removeError;
 
 			onChange(unset());
 			resetInput();
 		} catch (error) {
-			console.error(error);
-
-			alert(error instanceof Error ? error.message : "Failed to delete audio.");
+			setErrorMessage(error instanceof Error ? error.message : "Kunde inte ta bort ljudfilen.");
 			resetInput();
 		}
 	};
@@ -114,7 +114,7 @@ const AudioUploadInput = ({ value, onChange }: Props) => {
 	return (
 		<Stack space={4}>
 			<input
-				ref={input_ref}
+				ref={inputRef}
 				type="file"
 				accept="audio/mpeg"
 				onChange={handleUpload}
@@ -127,15 +127,26 @@ const AudioUploadInput = ({ value, onChange }: Props) => {
 					mode="default"
 					tone="primary"
 					disabled={uploading}
-					onClick={() => input_ref.current?.click()}
+					onClick={() => inputRef.current?.click()}
 				/>
 
 				{value?.url && (
-					<Button text="Ta bort ljudfil" tone="critical" mode="ghost" onClick={handleRemove} />
+					<Button
+						text="Ta bort ljudfil"
+						tone="critical"
+						mode="ghost"
+						disabled={uploading}
+						onClick={handleRemove}
+					/>
 				)}
 			</Flex>
 
 			{uploading && <Text size={1}>Laddar upp ljudfil...</Text>}
+			{errorMessage && (
+				<Card padding={2} radius={2} border>
+					<Text size={1}>{errorMessage}</Text>
+				</Card>
+			)}
 
 			{value?.url && (
 				<Card padding={3} radius={2} shadow={1} border>

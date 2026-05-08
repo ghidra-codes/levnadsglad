@@ -20,10 +20,12 @@ const DiaryPage = () => {
 
 	const slug = categorySlug ? decodeURIComponent(categorySlug) : "";
 
-	const { data: posts = [], isLoading, isError } = usePostsByCategory(slug);
+	const { data: posts, isLoading, isError, isFetched } = usePostsByCategory(slug);
 	const categoryFromCache = useCategoryBySlug(slug);
 
 	const items = useMemo<PostListItem[]>(() => {
+		if (!posts) return [];
+
 		return posts.map((post) => ({
 			...post,
 			publishedLabel: post.publishedAt ? formatDate(post.publishedAt) : "",
@@ -32,6 +34,7 @@ const DiaryPage = () => {
 	}, [posts]);
 
 	const { page, pageCount, pageItems, pageLabel, setPage } = usePagination(items);
+	const postCountLabel = isLoading ? "Laddar..." : `${items.length} inlägg`;
 
 	const handlePostSelect = (slug: string) => {
 		if (slug) navigate(buildPostPath(slug));
@@ -53,7 +56,7 @@ const DiaryPage = () => {
 		}
 	}, [slug, isLoading]);
 
-	if (!isLoading && !isError && !categoryFromCache) return <NotFoundPage />;
+	if (isFetched && !isLoading && !isError && categoryFromCache === null) return <NotFoundPage />;
 
 	return (
 		<section ref={pageRef} className="page page--diary">
@@ -63,11 +66,7 @@ const DiaryPage = () => {
 			<header className="page__header diary-header">
 				<div>
 					<h2>{categoryFromCache?.title ?? "\u00A0"}</h2>
-					<p>
-						{isLoading
-							? "Laddar..."
-							: `${items.length} ${items.length === 1 ? "inlägg" : "inlägg"}`}
-					</p>
+					<p>{postCountLabel}</p>
 				</div>
 			</header>
 
@@ -78,6 +77,9 @@ const DiaryPage = () => {
 					<>
 						<nav className="diary-nav" aria-label="Inlägg i dagboken">
 							<div className="diary-nav__select">
+								<label className="visually-hidden" htmlFor="diary-post-select">
+									Välj inlägg
+								</label>
 								<select
 									id="diary-post-select"
 									defaultValue=""

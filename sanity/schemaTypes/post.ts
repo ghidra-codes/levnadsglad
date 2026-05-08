@@ -1,3 +1,4 @@
+import type { Rule } from "sanity";
 import AudioUploadInput from "../components/AudioUploadInput";
 import { slugify } from "./utils/slugify";
 
@@ -14,6 +15,7 @@ export default {
 			options: {
 				search: { weight: 10 },
 			},
+			validation: (Rule: Rule) => Rule.required(),
 		},
 		{
 			name: "slug",
@@ -21,6 +23,7 @@ export default {
 			title: "Slug",
 			readOnly: true,
 			options: { source: "title", slugify },
+			validation: (Rule: Rule) => Rule.required(),
 		},
 		{
 			name: "publishedAt",
@@ -35,7 +38,7 @@ export default {
 			type: "reference",
 			title: "Kategori",
 			to: [{ type: "category" }],
-			validation: (Rule: any) => Rule.required(),
+			validation: (Rule: Rule) => Rule.required(),
 		},
 
 		{
