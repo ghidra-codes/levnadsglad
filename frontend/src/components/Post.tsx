@@ -4,7 +4,7 @@ import { PiLink } from "react-icons/pi";
 import { extractParagraphs, formatDate } from "@/lib/utils/helpers";
 import type { Post } from "@/types/post.types";
 import PostAudioPlayer from "./PostAudioPlayer";
-import PostReactions from "./PostReactions";
+// import PostReactions from "./PostReactions";
 import portableTextComponents from "./utils/portableTextComponents";
 
 interface PostProps {
@@ -71,7 +71,8 @@ const Post = ({ post }: PostProps) => {
 			)}
 
 			<footer className="post__footer">
-				<PostReactions postId={post._id} />
+				{/* Reactions are disabled because low traffic causes Supabase to repeatedly suspend the project. */}
+				{/* <PostReactions postId={post._id} /> */}
 
 				<a href={buildMailtoLink()} className="post__mail">
 					Dela en tanke
